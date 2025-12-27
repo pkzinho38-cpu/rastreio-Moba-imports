@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Rastreie o seu pedido - Logística - Moba Imports</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f4f6f8;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background: #0b3c5d;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+      font-size: 22px;
+      font-weight: bold;
+    }
+    .container {
+      max-width: 600px;
+      margin: 40px auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    h2 {
+      margin-top: 0;
+      text-align: center;
+      color: #333;
+    }
+    input {
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+      margin-top: 10px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+    }
+    button {
+      width: 100%;
+      margin-top: 15px;
+      padding: 12px;
+      font-size: 16px;
+      background: #0b3c5d;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #09405f;
+    }
+    .resultado {
+      margin-top: 30px;
+    }
+    .status {
+      padding: 15px;
+      border-left: 5px solid #0b3c5d;
+      background: #f0f4f8;
+      margin-bottom: 10px;
+      border-radius: 4px;
+    }
+    .erro {
+      color: red;
+      margin-top: 15px;
+      text-align: center;
+    }
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      font-size: 13px;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+     Logística - Moba Imports
+  </header>
+
+  <div class="container">
+    <h2>Rastreie o seu pedido - Logística - Moba Imports</h2>
+    <p>Digite o número do seu pedido:</p>
+    <input type="text" id="pedido" placeholder="Ex: 123345678902025" />
+    <button onclick="rastrear()">Rastrear Pedido</button>
+
+    <div id="mensagemErro" class="erro"></div>
+    <div id="resultado" class="resultado"></div>
+  </div>
+
+  <footer>
+    © 2025 Moba Imports - Todos os direitos reservados
+  </footer>
+
+  <script>
+  function rastrear() {
+    const numeroPedido = document.getElementById('pedido').value.trim();
+    const resultado = document.getElementById('resultado');
+    const erro = document.getElementById('mensagemErro');
+
+    resultado.innerHTML = '';
+    erro.innerHTML = '';
+
+    if (numeroPedido !== '22492127122025') {
+      erro.innerHTML = 'Número de pedido não encontrado. Verifique e tente novamente.';
+      return;
+    }
+
+    // Data atual (zerando horas para evitar erro)
+    const hoje = new Date();
+    hoje.setHours(0, 0, 0, 0);
+
+    // Datas de controle
+    const d27 = new Date(2025, 11, 27);
+    const d28 = new Date(2025, 11, 28);
+    const d29 = new Date(2025, 11, 29);
+    const d30 = new Date(2025, 11, 30);
+    const d31 = new Date(2025, 11, 31);
+
+    let statusAtual = '';
+
+    if (hoje.getTime() === d27.getTime()) {
+      statusAtual = '📍 <strong>27/12/2025</strong> – Pedido localizado na <strong>Central de Coleta – SP</strong>.';
+    } 
+    else if (hoje.getTime() === d28.getTime() || hoje.getTime() === d29.getTime()) {
+      statusAtual = '🚚 <strong>' + hoje.toLocaleDateString('pt-BR') +
+        '</strong> – Pedido a caminho da <strong>Central de Logística – SC</strong>.';
+    } 
+    else if (hoje.getTime() === d30.getTime()) {
+      statusAtual = '🏢 <strong>30/12/2025</strong> – Pedido recebido na <strong>Central de Logística – SC</strong>.<br>' +
+        '📦 <strong>Previsão de entrega:</strong> 31/12/2025 (quarta-feira).';
+    } 
+    else if (hoje.getTime() === d31.getTime()) {
+      statusAtual = '✅ <strong>31/12/2025</strong> – Pedido <strong>em rota final de entrega</strong>.';
+    } 
+    else {
+      statusAtual = 'ℹ️ Pedido registrado. Aguardando próxima atualização logística.';
+    }
+
+    const div = document.createElement('div');
+    div.className = 'status';
+    div.innerHTML = statusAtual;
+    resultado.appendChild(div);
+  }
+</script>
+    
+</body>
+</html>
