@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <title>Rastreie o seu pedido - Logística - Moba Imports</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <title>Rastreie seu pedido - Moba Imports</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <style>
     body {
       font-family: Arial, Helvetica, sans-serif;
@@ -11,6 +12,7 @@
       margin: 0;
       padding: 0;
     }
+
     header {
       background: #0b3c5d;
       color: #fff;
@@ -19,6 +21,7 @@
       font-size: 22px;
       font-weight: bold;
     }
+
     .container {
       max-width: 600px;
       margin: 40px auto;
@@ -27,11 +30,17 @@
       border-radius: 8px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
+
     h2 {
-      margin-top: 0;
       text-align: center;
       color: #333;
+      margin-top: 0;
     }
+
+    p {
+      color: #555;
+    }
+
     input {
       width: 100%;
       padding: 12px;
@@ -40,6 +49,7 @@
       border-radius: 4px;
       border: 1px solid #ccc;
     }
+
     button {
       width: 100%;
       margin-top: 15px;
@@ -51,24 +61,29 @@
       border-radius: 4px;
       cursor: pointer;
     }
+
     button:hover {
       background: #09405f;
     }
+
     .resultado {
       margin-top: 30px;
     }
+
     .status {
       padding: 15px;
-      border-left: 5px solid #0b3c5d;
       background: #f0f4f8;
-      margin-bottom: 10px;
+      border-left: 5px solid #0b3c5d;
       border-radius: 4px;
+      margin-bottom: 10px;
     }
+
     .erro {
       color: red;
       margin-top: 15px;
       text-align: center;
     }
+
     footer {
       text-align: center;
       margin-top: 40px;
@@ -77,77 +92,103 @@
     }
   </style>
 </head>
+
 <body>
 
-  <header>
-     Logística - Moba Imports
-  </header>
+<header>
+  Logística - Moba Imports
+</header>
 
-  <div class="container">
-    <h2>Rastreie o seu pedido - Logística - Moba Imports</h2>
-    <p>Digite o número do seu pedido:</p>
-    <input type="text" id="pedido" placeholder="Ex: 123345678902025" />
-    <button onclick="rastrear()">Rastrear Pedido</button>
+<div class="container">
+  <h2>Rastreie o seu pedido</h2>
+  <p>Digite o número do seu pedido:</p>
 
-    <div id="mensagemErro" class="erro"></div>
-    <div id="resultado" class="resultado"></div>
-  </div>
+  <input type="text" id="pedido" placeholder="Ex: 87654325652025">
+  <button onclick="rastrear()">Rastrear Pedido</button>
 
-  <footer>
-    © 2025 Moba Imports - Todos os direitos reservados
-  </footer>
+  <div id="mensagemErro" class="erro"></div>
+  <div id="resultado" class="resultado"></div>
+</div>
 
-  <script>
-  function rastrear() {
-    const numeroPedido = document.getElementById('pedido').value.trim();
-    const resultado = document.getElementById('resultado');
-    const erro = document.getElementById('mensagemErro');
+<footer>
+  © 2025 Moba Imports - Todos os direitos reservados
+</footer>
 
-    resultado.innerHTML = '';
-    erro.innerHTML = '';
+<script>
+function rastrear() {
+  const pedidoValido = '22492127122025';
+  const pedido = document.getElementById('pedido').value.trim();
+  const resultado = document.getElementById('resultado');
+  const erro = document.getElementById('mensagemErro');
 
-    if (numeroPedido !== '22492127122025') {
-      erro.innerHTML = 'Número de pedido não encontrado. Verifique e tente novamente.';
-      return;
-    }
+  resultado.innerHTML = '';
+  erro.innerHTML = '';
 
-    // Data atual (zerando horas para evitar erro)
-    const hoje = new Date();
-    hoje.setHours(0, 0, 0, 0);
-
-    // Datas de controle
-    const d27 = new Date(2025, 11, 27);
-    const d28 = new Date(2025, 11, 28);
-    const d29 = new Date(2025, 11, 29);
-    const d30 = new Date(2025, 11, 30);
-    const d31 = new Date(2025, 11, 31);
-
-    let statusAtual = '';
-
-    if (hoje.getTime() === d27.getTime()) {
-      statusAtual = '📍 <strong>27/12/2025</strong> – Pedido localizado na <strong>Central de Coleta – SP<br>Previsão 31/12/2025</strong>.';
-    } 
-    else if (hoje.getTime() === d28.getTime() || hoje.getTime() === d29.getTime()) {
-      statusAtual = '🚚 <strong>' + hoje.toLocaleDateString('pt-BR') +
-        '</strong> – Pedido a caminho da <strong>Central de Logística – SC<br>Previsão 31/12/2025<br>⚠️ACIDENTE NA PISTA - SEU PEDIDO PODE ATRAZAR UM POUCO</strong>.';
-    } 
-    else if (hoje.getTime() === d30.getTime()) {
-      statusAtual = '🏢 <strong>30/12/2025</strong> – Pedido recebido na <strong>Central de Logística – SC</strong>.<br>' +
-        '📦 <strong>Previsão de entrega:</strong> 31/12/2025 (quarta-feira).';
-    } 
-    else if (hoje.getTime() === d31.getTime()) {
-      statusAtual = '✅ <strong>31/12/2025</strong> – Pedido <strong>em rota final de entrega</strong>.';
-    } 
-    else {
-      statusAtual = 'ℹ️ Pedido registrado. Aguardando próxima atualização logística.';
-    }
-
-    const div = document.createElement('div');
-    div.className = 'status';
-    div.innerHTML = statusAtual;
-    resultado.appendChild(div);
+  if (pedido !== pedidoValido) {
+    erro.innerHTML = 'Número de pedido não encontrado. Verifique e tente novamente.';
+    return;
   }
+
+  const agora = new Date();
+
+  const d27 = new Date(2025, 11, 27);
+  const d28 = new Date(2025, 11, 28);
+  const d29 = new Date(2025, 11, 29);
+  const d30 = new Date(2025, 11, 30);
+  const d02 = new Date(2026, 0, 2);
+  const entrega = new Date(2026, 0, 3, 14, 0, 0);
+
+  let status = '';
+
+  if (agora < d28) {
+    status = `
+      📍 <strong>27/12/2025</strong><br>
+      Pedido localizado na <strong>Central de Coleta – SP</strong>.<br>
+      📦 Previsão inicial de entrega: <strong>31/12/2025</strong>.
+    `;
+  }
+  else if (agora >= d28 && agora < d29) {
+    status = `
+      🚚 <strong>28/12/2025</strong><br>
+      Pedido em transporte para a <strong>Central de Logística – SC</strong>.<br>
+      ⚠️ Acidente registrado no trajeto. A entrega poderá sofrer atraso.
+    `;
+  }
+  else if (agora >= d29 && agora < d30) {
+    status = `
+      ⚠️ <strong>29/12/2025</strong><br>
+      Devido a um <strong>acidente no trajeto</strong>, a data de entrega foi atualizada.<br>
+      📦 Nova previsão de entrega: <strong>03/01/2026</strong>.
+    `;
+  }
+  else if (agora >= d30 && agora < d02) {
+    status = `
+      🏢 <strong>30/12/2025</strong><br>
+      Pedido recebido na <strong>Central de Logística – SC</strong>.<br>
+      📦 Entrega programada para <strong>03/01/2026</strong>.
+    `;
+  }
+  else if (agora >= d02 && agora < entrega) {
+    status = `
+      🚚 <strong>03/01/2026</strong><br>
+      Pedido saiu para entrega.<br>
+      ⏰ Entrega prevista para <strong>hoje</strong>.
+    `;
+  }
+  else if (agora >= entrega) {
+    status = `
+      ✅ <strong>03/01/2026 – 14:00</strong><br>
+      Pedido entregue com sucesso.<br>
+      👤 Recebido por: <strong>Leticia Andrade</strong>.
+    `;
+  }
+
+  const div = document.createElement('div');
+  div.className = 'status';
+  div.innerHTML = status;
+  resultado.appendChild(div);
+}
 </script>
-    
+
 </body>
 </html>
